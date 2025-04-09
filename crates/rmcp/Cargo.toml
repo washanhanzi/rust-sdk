@@ -45,7 +45,7 @@ tower-service = { version = "0.3", optional = true }
 # for ws transport
 # tokio-tungstenite ={ version = "0.26", optional = true }
 
-# for sse-server transport
+# for sse-server transport and in-process transport
 axum = { version = "0.8", features = [], optional = true }
 rand = { version = "0.9", optional = true }
 tokio-stream = { version = "0.1", optional = true }
@@ -62,6 +62,7 @@ transport-sse = ["dep:reqwest", "dep:sse-stream", "dep:url"]
 transport-async-rw = ["tokio/io-util", "tokio-util/codec"]
 transport-io = ["transport-async-rw", "tokio/io-std"]
 transport-child-process = ["transport-async-rw", "tokio/process"]
+transport-in-process = ["tokio/sync", "dep:tokio-stream"]
 transport-sse-server = [
     "transport-async-rw",
     "dep:axum",
@@ -88,12 +89,23 @@ path = "tests/test_tool_macros.rs"
 
 [[test]]
 name = "test_with_python"
-required-features = ["server", "client", "transport-sse-server", "transport-sse", "transport-child-process"]
+required-features = [
+    "server",
+    "client",
+    "transport-sse-server",
+    "transport-sse",
+    "transport-child-process",
+]
 path = "tests/test_with_python.rs"
 
 [[test]]
 name = "test_with_js"
-required-features = ["server", "client", "transport-sse-server", "transport-child-process"]
+required-features = [
+    "server",
+    "client",
+    "transport-sse-server",
+    "transport-child-process",
+]
 path = "tests/test_with_js.rs"
 
 [[test]]
@@ -110,4 +122,3 @@ path = "tests/test_logging.rs"
 name = "test_message_protocol"
 required-features = ["client"]
 path = "tests/test_message_protocol.rs"
-

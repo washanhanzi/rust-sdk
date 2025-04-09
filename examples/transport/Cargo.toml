@@ -15,7 +15,11 @@ readme = { workspace = true }
 all-features = true
 
 [dependencies]
-rmcp = { path = "../../crates/rmcp", features = ["server", "client"] }
+rmcp = { path = "../../crates/rmcp", features = [
+    "server",
+    "client",
+    "transport-in-process",
+] }
 tokio = { version = "1", features = [
     "macros",
     "rt",
@@ -42,11 +46,11 @@ hyper-util = { version = "0.1", features = ["tokio"] }
 tokio-tungstenite = "0.26.2"
 reqwest = { version = "0.12" }
 pin-project-lite = "0.2"
+tokio-stream = "0.1"
 
 [[example]]
 name = "tcp"
 path = "src/tcp.rs"
-
 
 [[example]]
 name = "http_upgrade"
@@ -59,3 +63,7 @@ path = "src/unix_socket.rs"
 [[example]]
 name = "websocket"
 path = "src/websocket.rs"
+
+[[example]]
+name = "in_process"
+path = "src/in_process.rs"

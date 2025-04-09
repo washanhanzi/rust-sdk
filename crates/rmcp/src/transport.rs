@@ -56,6 +56,13 @@ pub mod sse;
 #[cfg(feature = "transport-sse")]
 pub use sse::SseTransport;
 
+#[cfg(feature = "transport-in-process")]
+pub mod in_process;
+#[cfg(feature = "transport-in-process")]
+pub use in_process::{
+    InProcessTransport, InProcessTransportExt, TokioInProcess, create_in_process_transport_pair,
+};
+
 // #[cfg(feature = "tower")]
 // pub mod tower;
 
